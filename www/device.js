@@ -79,4 +79,8 @@ Device.prototype.getInfo = function (successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Device', 'getDeviceInfo', []);
 };
 
+Device.prototype.getDateISOString = function (offset, successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'Device', 'getDateISOString', [offset]);
+};
+
 module.exports = new Device();

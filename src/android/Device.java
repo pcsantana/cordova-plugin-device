@@ -77,6 +77,9 @@ public class Device extends CordovaPlugin {
 	        r.put("isVirtual", this.isVirtual());
             r.put("serial", this.getSerialNumber());
             callbackContext.success(r);
+		}
+		else if ("getDateISOString".equals(action)) {
+            callbackContext.success(this.getDateISOString(args.getInt(0)));
         }
         else {
             return false;
@@ -169,6 +172,14 @@ public class Device extends CordovaPlugin {
     public boolean isVirtual() {
 	return android.os.Build.FINGERPRINT.contains("generic") ||
 	    android.os.Build.PRODUCT.contains("sdk");
-    }
+	}
+	
+	public String getDateISOString(int offset) {
+		// int offset = -180;
+        Date result = new Date();
+        result.setTime(result.getTime() - (offset * 60 * 1000));
 
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        callbackContext.success(isoFormat.format(result));
+	}
 }
