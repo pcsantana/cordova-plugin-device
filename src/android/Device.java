@@ -18,6 +18,8 @@
 */
 package org.apache.cordova.device;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 
 import org.apache.cordova.CordovaWebView;
@@ -179,7 +181,7 @@ public class Device extends CordovaPlugin {
         Date result = new Date();
         result.setTime(result.getTime() - (offset * 60 * 1000));
 
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-        callbackContext.success(isoFormat.format(result));
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        return isoFormat.format(result);
 	}
 }
